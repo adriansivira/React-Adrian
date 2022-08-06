@@ -3,16 +3,18 @@ import './App.css';
 import { Boton } from './Components/Boton';
 import { Form } from './Components/Form';
 import { Reserva } from './Components/Reserva';
+import { LoginMozos } from "./Components/LoginMozos";
 
 
 
 
 
-function App() {
+function App({estaLogeado}) {
 
   // se crea un array para imprimir la lista abajo
   const [usuarios, setUsuarios] = useState([])
   const [asistidos, setAsistidos] = useState(0)
+  
 
   // se agarra el parámetro (usuario) que a su vez es el objeto 
   //que está en form.js (declarado en manejar registro)
@@ -47,11 +49,14 @@ const manejarAsistio = (index) => {
   return (
     <div className="App">
       <div className='container'>
-      <loginDe/>
+      <div>
+        
+      </div>
         <p>Registro de reservas</p>
+      
         <div>
         
-          <Form agregarUsuario={agregarUsuario}/>
+        {estaLogeado? <Form agregarUsuario={agregarUsuario}/> : null}
         </div>
         <p>Hay {usuarios.length} reservas</p>
         <p>Hubo {asistidos} asistencias</p>
@@ -64,7 +69,8 @@ const manejarAsistio = (index) => {
             usuario={usuario} 
             deleteUser={deleteUser} 
             manejarAsistio={manejarAsistio}
-            setAsistidos={setAsistidos}/>
+            setAsistidos={setAsistidos}
+            hayMozo={estaLogeado}/>
           
           })}
         </ul>
